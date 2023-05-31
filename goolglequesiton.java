@@ -1,5 +1,5 @@
 import java.util.*;
-public class ftmn {
+public class goolglequesiton {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
@@ -8,36 +8,49 @@ public class ftmn {
             arr[i] = input.nextInt();
         }
         System.out.println(Arrays.toString(arr));
-        System.out.println("Missing number is:" + findmissingelement(arr));
+        int[] arr2 = findmissing(arr);
+        System.out.println("MISSING NUMBERS ARE:");
+        System.out.println(Arrays.toString(arr2));
         
         
     }
-    public static int findmissingelement(int[] arr){
+
+    static int[] findmissing(int[] arr){
+        int[] arr1 = new int[arr.length];
         int i=0;
-        int sum = 0;
-        int missing;
+        
         while(i<arr.length){
-            int correct = arr[i];
-            if(correct < arr.length && arr[correct] != arr[i] ){
+            int correct = arr[i]-1;
+            if(arr[i] != arr[correct]){
                 swap(arr, i, correct);
             }
-
             else{
                 i++;
             }
-
         }
+        int m =0;
         for(int j=0;j<arr.length;j++){
-            sum += arr[j];
+            if(j == arr[j] - 1){
+                continue;
+            }
+            else{
+               arr1[m] = j+1;
+               m++;
+            }
         }
-        missing = (arr.length*(arr.length+1)/2) - sum;
-
+        int[] missing = new int[m];
+        for(int k=0;k<m;k++){
+            missing[k] = arr1[k];
+        }
 
         return missing;
+        
     }
+
     static void swap(int[] arr, int first, int correct){
         int temp = arr[first];
         arr[first] = arr[correct];
         arr[correct] =temp;
     } 
 }
+
